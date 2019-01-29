@@ -1,0 +1,151 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title i18n="welcome_pagetitle"></title>
+	<link rel="stylesheet" href="css/master.css">
+	<link rel="stylesheet" href="css/options.css">
+	<link rel="stylesheet" href="css/welcome.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js_system/common.js"></script>
+	<script src="js_system/options.js"></script>
+	<script src="js_system/websites.js"></script>
+	<script src="js_system/welcome.js"></script>
+	<script src="js_system/db.js"></script>
+</head>
+<body class="body--initial-screen">
+
+	<div class="welcome-image"></div>
+
+	<div class="welcome-wrapper">
+	<!-- WELCOME - Signup -->
+	<div class="welcome" id="welcome-99">
+		<h1 i18n="welcome_signup_h1"></h1>
+		<form class="sign-up" method="post">
+			<div class="form-group">
+				<label for="signup-email" i18n="email"></label>
+				<input type="email" id="signup-email" i18n-placeholder="enter_your_email">
+			</div>
+			<div class="form-group">
+				<label for="signup-password" i18n="password"></label>
+				<input type="password" id="signup-password" i18n-placeholder="choose_password">
+			</div>
+			<div class="form-errors"></div>
+			<div class="form-group">
+				<button type="submit" class="b" i18n="sign_up"></button>
+				<span class="back" i18n="or"></span>
+				<a class="blue click-welcome-finish" i18n="continue_without_account"></a>
+			</div>
+		</form>
+	</div>
+
+	<!-- WELCOME - Introduction -->
+		<div class="welcome" id="welcome-1">
+			<h1 i18n="welcome_1_h1"></h1>
+			<p i18n="welcome_1_1" style="font-size:1.4em; padding: 14px 0 0; text-align:left;"></p>
+			<p i18n="welcome_1_2" style="font-size:1.4em; padding: 0; text-align:left;"></p>
+			<br>
+			<div class="center">
+				<a class="b click-welcome" data-screen="2">
+					<span i18n="welcome_continue"></span> &raquo;
+				</a>
+				<span class="back" i18n="or"></span>
+				<a i18n="welcome_skip_the_tour" style="font-size:1.2em; padding-left: 0;" class="back blue click-welcome" data-screen="10"></a>
+			</div>
+		</div>
+
+	<!-- WELCOME 2 - A dial -->
+		<div class="welcome" id="welcome-2">
+			<p class="steps">
+				<a class="back click-welcome" data-screen="1">&laquo; <span i18n="welcome_back"></span></a>
+				<a class="b click-welcome" data-screen="3"><span i18n="welcome_continue"></span> &raquo;</a>
+			</p>
+			<h1 i18n="welcome_2_h1"></h1>
+			<p>
+				<img src="http://i.imgur.com/mTmxmjA.jpg" width="750" />
+			</p>
+			<p i18n="welcome_2_1"></p>
+			<p i18n="welcome_2_2"></p>
+		</div>
+
+	<!-- WELCOME 3 - Creating dial -->
+		<div class="welcome" id="welcome-3">
+			<p class="steps">
+				<a class="back click-welcome" data-screen="2">&laquo; <span i18n="welcome_back"></span></a>
+				<a class="b click-welcome" data-screen="4"><span i18n="welcome_continue"></span> &raquo;</a>
+			</p>
+			<h1 i18n="welcome_3_h1"></h1>
+			<p><img src="http://i.imgur.com/iFibP5n.jpg" width="730" /></p>
+			<h3 i18n="welcome_3_1"></h3>
+			<p i18n="welcome_3_2"></p>
+		</div>
+
+	<!-- WELCOME 4 - Editing dial -->
+		<div class="welcome" id="welcome-4">
+			<p class="steps">
+				<a class="back click-welcome" data-screen="3">&laquo; <span i18n="welcome_back"></span></a>
+				<a class="b click-welcome" data-screen="9"><span i18n="welcome_continue"></span> &raquo;</a>
+			</p>
+			<h1 i18n="welcome_4_h1"></h1>
+			<p>
+				<img src="http://i.imgur.com/RojuKWJ.jpg" width="460" />
+			</p>
+			<p i18n="welcome_4_1"></p>
+		</div>
+
+	<!-- WELCOME 9 - Customization -->
+		<div class="welcome" id="welcome-9">
+			<p class="steps">
+				<a class="back click-welcome" data-screen="4">&laquo; <span i18n="welcome_back"></span></a>
+				<a class="b click-welcome" data-screen="7"><span i18n="welcome_continue"></span> &raquo;</a>
+			</p>
+			<h1 i18n="welcome_9_h1"></h1>
+
+			<img src="http://i.imgur.com/twqE5D7.jpg" alt="" width="890"><br><br>
+
+			<p i18n="welcome_9_1"></p>
+
+		</div>
+
+	<!-- WELCOME 7 - Statistics -->
+		<div class="welcome" id="welcome-7">
+			<p class="steps">
+				<a class="back click-welcome" data-screen="9">&laquo; <span i18n="welcome_back"></span></a>
+				<a class="b click-welcome" data-screen="10"><span i18n="welcome_continue"></span> &raquo;</a>
+			</p>
+			<h1 i18n="welcome_7_h1"></h1>
+			<p i18n="welcome_7_1"></p>
+			<p>
+				<br /><img style="margin-left:-40px;width:818px;" src="http://i.imgur.com/SfyRZMZ.jpg" />
+			</p>
+
+		</div>
+
+		<!-- WELCOME 10 -->
+		<div class="welcome" id="welcome-10">
+
+			<p class="steps">
+				<a class="back click-welcome" data-screen="7">&laquo; <span i18n="welcome_back"></span></a>
+				<a class="b click-import-selected" i18n="welcome_finish"></a>
+			</p>
+
+			<h1 i18n="welcome_10_h1"></h1>
+
+			<p style="font-size:17px!important" i18n="welcome_10_1"></p>
+
+			<div id="most_visited_websites"></div>
+
+			<div style="clear:both"></div>
+
+		</div>
+
+	</div> <!--! end of #container -->
+
+	<!--! plugin component dialogs -->
+	<div id="message"></div>
+
+	<div class="follow">
+		Made by
+		<a target="_blank" href="http://twitter.com/virae">@virae</a>
+	</div>
+
+</body></html>

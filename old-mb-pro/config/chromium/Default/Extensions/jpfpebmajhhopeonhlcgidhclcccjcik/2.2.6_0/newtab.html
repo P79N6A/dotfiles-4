@@ -1,0 +1,418 @@
+<html lang="en">
+<head>
+<!--
+                                __      __                ___       ___
+  by michal simonfy            /\ \    /\ \  __          /\_ \    /'___'\
+  ____  _____      __     __   \_\ \   \_\ \/\_\     __  \//\ \  /\_\ /\ \
+ /',__\/\ '__'\  /'__'\ /'__'\ /'_' \  /'_' \/\ \  /'__'\  \ \ \ \/_/// /__
+/\__, '\ \ \L\ \/\  __//\  __//\ \L\ \/\ \L\ \ \ \/\ \L\.\_ \_\ \_  // /_\ \  __
+\/\____/\ \ ,__/\ \____\ \____\ \___,_\ \___,_\ \_\ \__/.\_\/\____\/\______/ /\_\
+ \/___/  \ \ \/  \/____/\/____/\/__,_ /\/__,_ /\/_/\/__/\/_/\/____/\/_____/  \/_/
+          \ \_\
+           \/_/               http://speeddial2.com by http://virae.org
+-->
+	<meta charset="utf-8">
+	<meta name="author" content="Michal Šimonfy">
+	<meta http-equiv="cache-control" content="public">
+	<meta http-equiv="expires" content="Wed, 1 Jan 2014 00:00:00 GMT">
+	<title i18n="new_tab">New tab</title>
+	<script src="beta/js/beta.js"></script>
+	<link rel="stylesheet" href="css/master.css" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/clone.js"></script>
+	<script src="js/vue.min.js"></script>
+	<script src="js/Uri.js"></script>
+	<script src="js_system/common.js"></script>
+	<script src="js_system/options.js"></script>
+	<script src="js_system/themes.js"></script>
+	<script src="js_system/websites.js"></script>
+	<script src="js/jquery.ui.min.js"></script>
+	<script src="js/tools.js"></script>
+	<script src="js_system/db.js"></script>
+	<script src="js_system/speeddial.js"></script>
+</head>
+
+<body class="theme">
+
+	<div id="container" class="is-animated">
+
+		<div class="new-tab-header">
+			<div class="groups-container">
+				<ul id="groups"></ul>
+			</div>
+			<div class="search-form search-form--expanding">
+				<input type="text" i18n-placeholder="search" class="form-control js-new-tab-search">
+				<span class="icon-search"></span>
+			</div>
+			<div id="quick-settings-icon" i18n-title="options_dialog_title"></div>
+		</div>
+		<ul id="pages"></ul>
+		<div id="appspanel_wrapper"><ul id="appspanel"></ul></div>
+
+	</div><!--! end of #container -->
+
+	<div id="sidebar-toggle"></div>
+	<div class="sidebar-arrow"></div>
+
+<!--! messages -->
+	<div id="message"></div>
+
+<!--! context menu -->
+	<div class="contextMenu" id="editlinkmenu">
+	<ul>
+		<li id="opennewwindow" i18n="newtab_open_in_new_tab">Open in new tab</li>
+		<li class="separator"></li>
+		<li id="edit" i18n="edit">Edit</li>
+		<li id="delete" i18n="remove">Remove</li>
+		<li id="refresh" i18n="newtab_reload_thumbnail">Reload thumbnail</li>
+	</ul>
+	</div>
+	<div class="contextMenu" id="newitemmenu">
+	<ul>
+		<!--<li id="add">Add dial</li>-->
+		<li id="add" i18n="newtab_add_new_dial">Add new bookmark</li>
+		<li id="create_group" i18n="newtab_create_group">Create new group</li>
+		<li class="separator"></li>
+		<li id="options" i18n="options">Options</li>
+		<li id="statistics" i18n="statistics">Statistics</li>
+		<li id="help" i18n="help">Help</li>
+	</ul>
+	</div>
+	<div class="contextMenu" id="editgroupmenu">
+	<ul>
+		<li class="js-home-show grey" i18n="newtab_homegroup">This is your primary group</li>
+		<li id="openallgroup" i18n="newtab_open_all_links">Open all bookmarks</li>
+		<li class="separator"></li>
+		<li id="editgroup" i18n="newtab_edit_group">Edit group</li>
+		<li id="deletegroup" class="js-home-hide" i18n="newtab_remove_group">Remove group</li>
+	</ul>
+	</div>
+	<div class="contextMenu" id="editappmenu">
+	<ul>
+		<li id="app_launch" i18n="newtab_app_launch">Launch application</li>
+		<li class="separator"></li>
+		<li id="app_options" i18n="options">Options</li>
+		<li id="app_uninstall" i18n="uninstall">Uninstall</li>
+	</ul>
+	</div>
+
+<!--! sidebars -->
+	<div id="sidebars">
+		<div id="apps">
+			<h1><a href="https://chrome.google.com/webstore/category/home" i18n="applications">Applications</a></h1>
+			<hr />
+			<ul id="apps_ul"></ul>
+		</div>
+		<div id="bookmarks">
+			<h1><a href="chrome://bookmarks/" i18n="bookmarks">Bookmarks</a></h1>
+			<div id="bookmark_search_li"><input class="sidebar_search" type="text" name="bookmarks_search" placeholder="Search your bookmarks" i18n-placeholder="newtab_search_your_bookmarks" id="bookmarks-search" /></div>
+			<ul></ul>
+		</div>
+		<div id="history">
+			<h1><a href="#" class="click-open" data-url="chrome://history/" i18n="recently_closed_tabs">Recently closed tabs</a></h1>
+			<div id="history_search_li"><input class="sidebar_search" type="text" name="history_search" placeholder="Search your history" i18n-placeholder="newtab_search_your_history" id="history-search" /></div>
+			<ul id="history_items"></ul>
+		</div>
+	</div>
+
+	<footer></footer>
+
+	<div id="modals">
+		<modal v-if="state.open" @close="dismiss()" @overlay-clicked="onOverlayClick($event)" :class="'modal--' + this.state.view" v-cloak>
+			<div slot="header">
+				<h2 class="modal__title">{{ headings[state.type] }}</h2>
+				<a @click="dismiss()" class="modal__close">&times;</a>
+			</div>
+			<!-- tabs -->
+
+			<div slot="navigation">
+				<div class="modal__navigation" v-if="state.type == types.BOOKMARK_ADD">
+					<a @click="setView('by-url')" class="modal__tab" :class="{ 'modal__tab--selected': state.view != 'popular' }" i18n="options_themes_url"></a>
+					<a @click="setView('popular')" class="modal__tab" :class="{ 'modal__tab--selected': state.view == 'popular' }" i18n="newtab_thumbnail_popular"></a>
+
+					<div class="modal__search" v-if="state.view == 'popular'">
+						<div class="search-form">
+							<input type="text" v-model="query" @keyup.esc="query = ''" class="form-control" i18n-placeholder="search">
+							<span class="icon-search"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div slot="body" class="form">
+
+				<!-- add / edit bookmark -->
+				<div v-if="state.type == types.BOOKMARK_ADD || state.type == types.BOOKMARK_EDIT">
+
+					<div v-if="state.view != 'popular'">
+						<!-- url -->
+						<div class="form-group">
+							<label for="bookmark-url">URL</label>
+							<input type="text" id="bookmark-url" ref="url" v-model="bookmark.url" i18n-placeholder="newtab_type_url" class="form-control input-lg" @blur="onUrlBlur" @keyup.enter="submit()" @keyup.esc="dismiss()" />
+						</div>
+						<!-- title -->
+						<div class="form-group">
+							<label for="bookmark-title">Title</label>
+							<input type="text" id="bookmark-title" v-model="bookmark.title" i18n-placeholder="newtab_enter_name" class="form-control input-lg" @keyup.enter="submit()" />
+						</div>
+						<!-- thumbnail -->
+						<div class="form-group" v-if="bookmark.title">
+							<label for="bookmark-thumbnail" i18n="newtab_customize_thumbnail">Select thumbnail</label>
+						</div>
+
+						<div class="form-group" v-if="bookmark.title">
+							<div class="custom-thumbnails">
+								<!-- clearbit -->
+								<div class="custom-thumbnail custom-thumbnail--logo" v-if="bookmark.logo" @click="setThumbnailSource('logo')" :class="{ 'custom-thumbnail--selected': bookmark.thumbnailSource == 'logo' }">
+									<img :src="bookmark.logo" class="custom-thumbnail__logo" />
+								</div>
+								<!-- capture -->
+								<div class="custom-thumbnail custom-thumbnail--capture" @click="setThumbnailSource('capture')" :class="{ 'custom-thumbnail--selected': bookmark.thumbnailSource == 'capture' }">
+									<img src="images/icons/capture.svg" class="custom-thumbnail__icon" />
+									<div class="custom-thumbnail__label">
+										Capture
+									</div>
+								</div>
+								<!-- custom url -->
+								<div class="custom-thumbnail custom-thumbnail--url" @click="setThumbnailSource('url')" :class="{ 'custom-thumbnail--selected': bookmark.thumbnailSource == 'url' }">
+									<img src="images/icons/url.svg" class="custom-thumbnail__icon" />
+									<div class="custom-thumbnail__label">
+										Custom URL
+									</div>
+								</div>
+								<!-- upload -->
+								<div class="custom-thumbnail custom-thumbnail--upload" @click="uploadThumbnail()" :class="{ 'custom-thumbnail--selected': bookmark.thumbnailSource == 'upload' }">
+									<div v-if="bookmark.upload" class="custom-thumbnail__logo-wrapper">
+										<img :src="bookmark.upload" class="custom-thumbnail__logo" />
+									</div>
+									<div v-if="!bookmark.upload">
+										<img src="images/icons/upload.svg" class="custom-thumbnail__icon" />
+										<div class="custom-thumbnail__label" v-if="state.fileUpload">
+											Uploading...
+											<div class="progress-bar"><div class="bar"><div class="fill"></div></div></div>
+										</div>
+										<div class="custom-thumbnail__label" v-if="!state.fileUpload">
+											Upload
+										</div>
+										<div class="custom-thumbnail__badge">
+											Pro
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group" v-if="bookmark.thumbnailSource == 'url'">
+							<input type="text" id="bookmark-thumbnail" v-model="bookmark.thumbnail" i18n-placeholder="newtab_thumbnail_image_url" class="form-control input-lg" maxlength="255" />
+						</div>
+
+						<div class="form-group text-right" v-if="bookmark.thumbnailSource == 'upload' && !state.premium">
+							<span i18n="newtab_feature_locked">This feature is available only for Pro users. </span>
+							<a class="text-link" @click="upgradeToPro()" i18n="newtab_click_to_learn_more">Click here to learn more</a>
+						</div>
+					</div>
+
+					<div v-if="state.view == 'popular'">
+						<div class="form-group">
+							<div class="popular-websites">
+								<div v-for="(item, index) of popularWebsitesResult" :key="index" class="popular-websites__item" :class="{ 'popular-websites__item--selected': item.selected }" @click="toggleWebsite(item)">
+									<img v-bind:src="item.logo" />
+									{{ item.title }}
+								</div>
+							</div>
+						</div>
+						<!--
+							TODO: icons from:
+							http://othericons.com/
+							http://modern.squintongreen.com/
+							http://fairheadcreative.com/blog/fc-webicons-set-launched/
+							http://simpleicons.org/
+						-->
+					</div>
+
+				</div>
+
+				<!-- remove bookmark -->
+				<div v-if="state.type == types.BOOKMARK_REMOVE">
+					<p class="lead text-center" i18n="newtab_dial_remove_warning"></p>
+				</div>
+
+				<!-- add / edit group -->
+				<div v-if="state.type == types.GROUP_ADD || state.type == types.GROUP_EDIT">
+					<!-- title -->
+					<div class="form-group">
+						<input type="text" id="group-title" ref="title" v-model="group.title" i18n-placeholder="newtab_enter_name" class="form-control input-lg" @keyup.enter="submit()" @keyup.esc="dismiss()" />
+					</div>
+				</div>
+
+				<!-- remove group -->
+				<div v-if="state.type == types.GROUP_REMOVE">
+					<p class="lead text-center" i18n="newtab_group_remove_warning"></p>
+				</div>
+
+			</div>
+
+			<div slot="footer">
+				<button class="btn white btn-small" @click="dismiss" i18n="cancel">Cancel</button>
+				<button v-if="state.type == types.BOOKMARK_ADD" class="btn blue btn-small" @click="submit()" i18n="save"></button>
+				<button v-if="state.type == types.GROUP_ADD" class="btn blue btn-small" @click="submit()" i18n="save"></button>
+				<button v-if="state.type == types.BOOKMARK_EDIT" class="btn blue btn-small" @click="submit()" i18n="save"></button>
+				<button v-if="state.type == types.GROUP_EDIT" class="btn blue btn-small" @click="submit()" i18n="save"></button>
+				<button v-if="state.type == types.GROUP_REMOVE" class="btn red btn-small" @click="submit()" i18n="delete"></button>
+				<button v-if="state.type == types.BOOKMARK_REMOVE" class="btn red btn-small" @click="submit()" i18n="delete"></button>
+			</div>
+		</modal>
+	</div>
+
+	<div id="options-modal">
+		<modal v-if="state.open" @close="dismiss()" @overlay-clicked="onOverlayClick($event)" class="modal--options" v-cloak>
+
+			<div slot="header">
+				<h2 class="modal__title" i18n="options_dialog_title"></h2>
+				<a @click="dismiss()" class="modal__close">&times;</a>
+			</div>
+			<!-- tabs -->
+
+			<div slot="body" class="form options-modal">
+
+				<div class="options-modal__item">
+					<label class="options-modal__label" i18n="options_dialog_set_columns">Number of columns</label>
+					<div class="options-modal__input">
+						<div class="range-slider">
+							<input type="range" min="2" max="20" step="1" v-model.number="columns" class="range-slider__range" />
+							<input type="text" class="input-range-value" disabled="disabled" v-model.number="columns" />
+							<span style="display: inline-block; width: 24px"></span>
+						</div>
+					</div>
+				</div>
+				<div class="options-modal__item">
+					<label class="options-modal__label" i18n="spacing">Spacing</label>
+					<div class="options-modal__input">
+						<div class="range-slider">
+							<input type="range" min="0" max="50" step="2" v-model.number="spacing" class="range-slider__range" />
+							<input type="text" class="input-range-value" disabled="disabled" v-model.number="spacing" />
+							<span style="display: inline-block; width: 24px">px</span>
+						</div>
+					</div>
+				</div>
+				<div class="options-modal__item">
+					<label class="options-modal__label" i18n="width">Width</label>
+					<div class="options-modal__input">
+						<div class="range-slider">
+							<input type="range" min="50" max="95" step="2" v-model.number="width" class="range-slider__range" />
+							<input type="text" class="input-range-value" disabled="disabled" v-model.number="width" />
+							<span style="display: inline-block; width: 24px">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="options-modal__item">
+					<label for="options-center" class="options-modal__label">
+						<span i18n="options_dialog_center_vertically">Center vertically</span>
+					</label>
+					<label>
+						<input type="checkbox" class="ios-switch" v-model="center" value="1" id="options-center" />
+						<div><div></div></div>
+					</label>
+				</div>
+				<div class="options-modal__item" v-if="state.groupsCount">
+					<label for="options-darktheme" class="options-modal__label">
+						<span i18n="">Dark theme</span>
+					</label>
+					<label>
+						<input type="checkbox" class="ios-switch" v-model="darkTheme" value="1" id="options-darktheme" />
+						<div><div></div></div>
+					</label>
+				</div>
+				<div class="options-modal__item">
+					<label for="options-showaddbutton" class="options-modal__label">
+						<span i18n="options_options_plus_button_show">Show</span> <b>+</b> <span i18n="options_options_plus_button_button">button</span>
+					</label>
+					<label>
+						<input type="checkbox" class="ios-switch" v-model="plusButton" value="1" id="options-showaddbutton" />
+						<div><div></div></div>
+					</label>
+				</div>
+
+				<div class="options-modal__item">
+					<label class="options-modal__label click-open-extension-page" data-url="options.html#design" i18n="options_dialog_themes">
+						Themes
+					</label>
+					<img src="images/newtab.themes.jpg" style="max-width:260px" class="options-modal__themes-image click-open-extension-page" data-url="options.html#design" />
+				</div>
+
+				<div class="options-modal__sync-section">
+					<div v-if="!state.premium">
+						<a href="#" class="btn grey btn-small btn-border block click-open-extension-page newtab-show-free" data-url="options.html#tab-sync" i18n="options_dialog_protect_your_data">
+							Protect your data with sync &amp; backup
+						</a>
+					</div>
+					<div v-if="state.premium">
+						<a href="#" class="btn white block click-open-extension-page" data-url="options.html#tab-sync">
+							<img src="images/options.sync.ok.svg" width="18" style="vertical-align: middle" />&nbsp;
+							<span i18n="options_dialog_sync_ok">Your data is synchronized and backed up!</span>
+						</a>
+
+						<div class="options-modal__sync">
+							<div>
+								<strong i18n="options_dialog_sync_last">Last sync</strong>:
+								{{ state.lastSync }}
+							</div>
+							<div v-if="!this.state.synchronizing">
+								<a class="text-link" @click="sync()" i18n="sync_now">Sync now</a>
+							</div>
+							<div v-if="this.state.synchronizing">
+								...
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div slot="footer">
+				<div>
+					<button class="btn btn-small white click-open-extension-page" data-url="statistics.html" i18n="statistics_statistics">Statistics</button>
+				</div>
+				<button class="btn btn-small blue click-open-extension-page" data-url="options.html" type="button" i18n="options_dialog_more_options">More options...</button>
+			</div>
+		</modal>
+	</div>
+
+	<div id="news-modal">
+		<modal v-if="state.open" @close="dismiss()" class="modal--news" v-cloak>
+			<div slot="body" class="form options-modal">
+				<div v-html="content.news"></div>
+				<a @click="dismiss()" class="modal__close">&times;</a>
+			</div>
+			<div slot="footer">
+				<button @click="dismiss()" class="btn btn-small white" type="button" i18n="close_message"></button>
+			</div>
+		</modal>
+	</div>
+
+	<!-- template for the modal component -->
+	<script type="text/x-template" id="modal-template">
+	 <transition name="modal">
+		 <div class="modal modal__mask" @click="$emit('overlay-clicked', $event)">
+			 <div class="modal__wrapper">
+				 <div class="modal__container">
+					 <div class="modal__header">
+						 <slot name="header"></slot>
+					 </div>
+					 <slot name="navigation"></slot>
+					 <div class="modal__body">
+						 <slot name="body"></slot>
+					 </div>
+					 <div class="modal__footer">
+						 <slot name="footer">
+							 <button class="modal-default-button" @click="$emit('close')">OK</button>
+						 </slot>
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </transition>
+	</script>
+
+</body></html>

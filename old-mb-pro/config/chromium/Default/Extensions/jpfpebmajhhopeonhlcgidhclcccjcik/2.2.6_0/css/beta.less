@@ -1,0 +1,201 @@
+html {
+	height: 100%;
+	overflow: hidden;
+}
+body {
+    margin: 0;
+    padding: 60px 0 0;
+    height: 100%;
+    background: #e4e7e6;
+    overflow:hidden;
+    overflow-y: scroll;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+
+header {
+	
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    // max-height: 55px;
+    
+    ul {
+        font-size: 14px;
+
+        margin: 0;
+        padding: 0;
+
+        list-style-type: none;
+        float: left;
+
+        color: #666;
+        li {
+            display: inline-block;
+        }
+        li a {
+            display: block;
+            padding: 20px 20px 20px 17px;
+            border-bottom: 4px solid #fff;
+            cursor: pointer;
+        }
+        li.is-active {
+            a {
+                border-color: #666;    
+            }
+        }
+    }
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto 160px auto;
+}
+
+.header-search {
+    padding: 14px 32px;
+	input {
+		display: inline-block;
+		color: #666;
+		background: none;
+		background: 12px center url(../images/newtab.search.svg) no-repeat;
+        border-radius: 18px;
+        padding: 6px 10px 6px 32px;
+		background-size: 14px;
+		border: 1px solid rgba(0,0,0,0.2);
+		border-style: solid;
+        font-size: 13px;        
+		max-width: 400px;
+		outline: none;
+        margin: 0;
+	}	
+}
+#bookmarks {
+    
+    padding: 40px;
+    	    
+    .bookmark {
+        display: inline-block;
+
+        width: 23%;
+        max-width: 400px;
+        min-width: 200px;
+        margin: 1%;
+        
+        text-decoration: none;
+
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        transition: border-color .1s;
+    	
+        &:hover {
+        	// border-color: #ccc;
+        	// box-shadow: 0 0 3px rgba(0,0,0,0.1);
+            .bookmark-footer {
+                color: #777;
+            }
+        }
+        .bookmark-background {
+            overflow: hidden;
+
+            min-height: 180px;
+
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+        .bookmark-footer {
+            overflow: hidden;
+            text-align: left;
+            color: #222;
+            // padding: 8px 16px;
+            // background: #f6f6f6;
+            // border-top: 1px solid #eee;
+            background: #fff;
+            padding: 4px 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            .bookmark-favicon {
+                display: inline-block;
+                display: none;
+                margin: 0 2px 0 0;
+                vertical-align: middle;
+            }
+            .bookmark-title {
+                display: inline-block;
+                vertical-align: middle;
+                font-weight: normal;
+            }
+        }
+        
+        &.is-thumbnail {
+        	.bookmark-background {
+	        	background-size: cover;
+	        	background-position: left top;
+	        	padding: 0;
+	        }
+        }
+    }
+}
+
+.context-menu {
+    display: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    color: black;
+    white-space: nowrap;
+    padding: 10px 0;
+    margin: 0;
+    cursor: default;
+    border-radius: 2px;
+    z-index: 3;
+    &.open {
+        display: block;
+    }
+    ul {
+        min-width: 160px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border: 0!important;
+    }
+    ul li {
+        display: block;
+        margin: 0;
+        margin: 0 -1px;
+        padding: 5px 20px;
+        font-size: 13px;
+    }
+    ul li.divider {
+        background: -webkit-linear-gradient(left,rgba(0, 0, 0, .10),rgba(0, 0, 0, .02) 76%); 
+        border: 0; 
+        height: 1px;
+        padding:0 15px; 
+        margin: 8px 0;        
+    }
+    ul li:not([class="divider"]) {
+        &:hover {
+            cursor: pointer;
+            color: #ffffff;
+            background: #4699df;
+        }
+        &:active {
+            color: #ffffff;
+            background: #426dc9;
+        }
+    }
+}
+
+.pull-right {
+    float: right;
+}

@@ -1,0 +1,33 @@
+{
+   "background": {
+      "page": "background.html"
+   },
+   "browser_action": {
+      "default_icon": "icon64.png",
+      "default_popup": "menu.html",
+      "default_title": "Speed Dial 2"
+   },
+   "chrome_url_overrides": {
+      "newtab": "newtab.html"
+   },
+   "content_security_policy": "script-src 'self' 'unsafe-eval' https://stats.g.doubleclick.net https://js.braintreegateway.com https://api.braintreegateway.com https://api.sandbox.braintreegateway.com https://ssl.google-analytics.com; object-src 'self'",
+   "default_locale": "en",
+   "description": "__MSG_appDescription__",
+   "homepage_url": "http://speeddial2.com",
+   "icons": {
+      "128": "icon128.png",
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "64": "icon64.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC0dzy92u3hPDJcwwpnwlQMF174YLL08puWDfP31psj2FlwmeuHF9Pg2LXBSXaUn0GKwMhwtueiNuwXE3MPPux7NfcHWDOsQ6jPdssRs2ySxX+6jUoNVdO3Suxy5eZHt1J+z8J04rw+87h96lgYYFbrKZFHGPKwEKgorv2Ft+Qe5wIDAQAB",
+   "manifest_version": 2,
+   "name": "__MSG_appName__",
+   "options_page": "options.html",
+   "permissions": [ "bookmarks", "topSites", "tabs", "history", "management", "storage", "unlimitedStorage", "chrome://favicon/", "\u003Call_urls>", "contextMenus", "notifications", "alarms" ],
+   "short_name": "__MSG_appShortName__",
+   "update_url": "http://clients2.google.com/service/update2/crx",
+   "version": "2.2.6",
+   "web_accessible_resources": [ "newtab.html" ]
+}

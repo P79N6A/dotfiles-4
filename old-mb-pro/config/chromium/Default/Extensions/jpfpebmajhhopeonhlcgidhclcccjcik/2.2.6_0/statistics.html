@@ -1,0 +1,63 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Michal Šimonfy | http://virae.org">
+	<title i18n="statistics_pagetitle"></title>
+	<link rel="stylesheet" href="css/master.css">
+	<link rel="stylesheet" href="css/options.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js_system/common.js"></script>
+	<script src="js_system/db.js"></script>
+	<script src="js_system/statistics.js"></script>
+	<style type="text/css" media="screen">
+	#main {margin-top:60px;}
+	#chart_speeddial {min-height:200px;}
+	</style>
+</head>
+<body>
+	<div id="container">
+
+		<div id="main" class="rounded4 page-statistics">
+
+		<a class="alignright click-open-extension-page btn brown" data-url="newtab.html">&laquo; <span i18n="back"></span></a>
+
+		<h1 i18n="statistics_statistics" class="alignleft"></h1>
+		<div class="clearfix"></div>
+		<br><br>
+		<h2 i18n="statistics_most_visited_sd2"></h2>
+
+		<center>
+			<a href="#" id="statistics_overall" i18n="overall"></a> |
+			<a href="#" id="statistics_morning" i18n="morning"></a> |
+			<a href="#" id="statistics_afternoon" i18n="afternoon"></a> |
+			<a href="#" id="statistics_evening" i18n="evening"></a> |
+			<a href="#" id="statistics_night" i18n="night"></a>
+		</center>
+
+		<br /><br />
+
+		<div id="chart_speeddial"></div>
+
+		<br /><br />
+
+		<h2 i18n="statistics_most_visited_history"></h2>
+
+		<div id="chart_browser"><img src="images/loading.gif" /> <span i18n="statistics_loading_message"></div>
+
+		<br /><br /><br /><br /><br />
+
+			<center>
+				<a class="click-open-extension-page" data-url="newtab.html">
+					&laquo; <span i18n="back_to_bookmarks"></span>
+				</a>
+			</center><br />
+
+		</div>
+
+		<footer>with <span>&hearts;</span> by <a href="http://virae.org" target="_blank" id="virae">virae</a></footer>
+
+	</div> <!--! end of #container -->
+
+	<!--! plugin component dialogs -->
+	<div id="message"></div>
+</body></html>

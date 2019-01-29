@@ -1,0 +1,105 @@
+body {
+	font: 400 14px/20px "Helvetica", Arial, sans-serif;
+	width:300px;
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	background: #f6f6f6;
+	font-size:16px;
+	padding:14px 18px;
+	margin: 0;
+}
+h1.loading {
+	color: #222;
+}
+h1.loading a {
+	display: none;
+}		
+h1.loading.success {
+	color: #00a185;
+}
+h1 img {
+	vertical-align: middle;
+}
+h1 a {
+	float: right;
+	font-size: 14px;
+	cursor: pointer;
+	color: #4089F8;
+}
+h1 a:hover{
+	text-decoration: underline;
+}
+ul {
+	border-top:1px solid #eee;
+	margin: 0;
+	padding: 0;
+}
+ul li a {
+	display: block;
+	font-size:14px;
+	padding: 5px 18px;
+	border-bottom:1px solid #f6f6f6;
+	color: #444;
+	cursor: pointer;
+}
+ul li a:hover {
+	background: #4089F8;
+	color: #fff;
+}
+form {
+	display: none;
+	padding: 20px;
+}
+form label {
+	font-weight: bold;
+	font-size: 18px;
+}
+form input {
+	border-radius: 2px;
+	border: 1px solid #ddd;
+	padding: 8px 10px;
+	margin: 10px 0;
+	font-size: 14px;
+	width: 100%;
+	outline: none;
+}
+.js-create-group {
+	display: block;
+	font-weight: bold;
+	color: #4089F8;
+	padding: 8px 18px;
+}
+.btn {
+	color: white;
+	display: block;
+	cursor: pointer;
+	outline: none;
+	position: relative;
+	width: 100%;
+	border: none;
+	font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+	font-size: 14px;
+	line-height: 1.6875;
+	text-align: center;
+	letter-spacing: .05em;
+	text-decoration: none;
+	padding: .34143em 1.42857em;
+	max-width: 100%;
+	border-radius: 4px;
+	transition: all .2s ease;
+	background: #4089F8;
+}
+.btn:hover {
+	background:#1f72b8;
+	text-decoration: none;
+}
+
+/* States */
+.is-create-new-group ul {
+	display: none;
+}
+.is-create-new-group form {
+	display: block;
+}

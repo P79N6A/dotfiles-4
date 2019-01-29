@@ -1,0 +1,1130 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title i18n="options_pagetitle"></title>
+	<link rel="stylesheet" href="css/master.css">
+	<link rel="stylesheet" href="css/bootstrap.css" />
+	<link rel="stylesheet" href="css/options.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/jscolor.js"></script>
+	<script src="js/json2.js"></script>
+	<script src="js/buy.js"></script>
+	<script src="js/jquery.ui.min.js"></script>
+	<script src="js/tooltip.js"></script>
+	<script src="js/jquery.omniwindow.js"></script>
+	<script src="js/hideShowPassword.js"></script>
+	<script src="js_system/options.js"></script>
+	<script src="js_system/options.base64.js"></script>
+	<script src="js_system/options.export.js"></script>
+	<script src="js_system/common.js"></script>
+	<script src="js_system/db.js"></script>
+	<script src="js_system/themes.json.js"></script>
+	<script src="js/jquery.payment.js"></script>
+	<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+	<script src="js_system/options.page.js"></script>
+</head>
+<body>
+
+	<div id="container">
+
+		<header>
+			<div class="wrap">
+				<div class="hidden show-ja translation-credit">
+					Professional Japanese localization<br>by Maasan (available on LinkedIn)
+				</div>
+			</div>
+
+		</header>
+
+		<div id="main" class="rounded4 wrap">
+
+			<div class="header">
+				<div class="settings_buttons" style="float:right;">
+					<div style="display: inline-block; margin-right: 10px;">
+						<div class="show-unregistered">
+							<a href="#" class="click-tab-sync btn blue" i18n="pro_sync_upgrade_cta">Go Premium</a>
+						</div>
+					</div>
+					<button id="savesettingstop" class="save_settings_button btn" type="submit" class="rounded4" style="display:inline-block; margin-top:-8px;" i18n="save_settings">Save settings</button>
+				</div>
+				<h1 style="border:0;" i18n="options_options"></h1>
+			</div>
+
+			<div id="options_navigation">
+				<ul>
+					<li><a class="options_tab_link selected" rel="general" i18n="options_nav_options"></a></li>
+					<li><a class="options_tab_link" rel="design" i18n="options_nav_background"></a></li>
+					<li><a class="options_tab_link" rel="sidebars" i18n="options_nav_sidebar"></a></li>
+					<li><a class="options_tab_link" rel="apps" i18n="options_nav_apps"></a></li>
+					<li><a class="options_tab_link" rel="dials" i18n="options_nav_customize"></a></li>
+					<li><a class="options_tab_link" rel="sync" id="sync_indicator" i18n="options_nav_sync"></a></li>
+					<li><a class="options_tab_link" rel="importexport" i18n="options_nav_backup"></a></li>
+
+				</ul>
+			</div>
+
+			<div id="options">
+
+				<form action="newtab.html" method="post" accept-charset="utf-8">
+
+<!-- GENERAL -->
+
+	<div id="tab_dials" class="options_tab">
+
+		<div id="preview">
+			<ul id="pages">
+				<li class="link">
+					<a>
+						<div class="thumbnail_container"></div>
+						<div class="title" i18n="title"></div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<br /><br />
+
+		<table style="width:100%;">
+			<tr>
+				<td i18n="options_customize_shadow" width="300"></td>
+				<td>
+					<div class="radio-buttons">
+						<input type="radio" name="options-dropShadow" class="click-preview-shadow" value="none" id="options-dropShadow-none" />
+						<label for="options-dropShadow-none" i18n="options_customize_no_shadow">
+							No shadow
+						</label>
+
+						<input type="radio" name="options-dropShadow" class="click-preview-shadow" value="box" id="options-dropShadow-5" />
+						<label for="options-dropShadow-5">
+							Box
+						</label>
+
+						<input type="radio" name="options-dropShadow" class="click-preview-shadow" value="drop" id="options-dropShadow-3" />
+						<label for="options-dropShadow-3">
+							Drop
+						</label>
+
+						<input type="radio" name="options-dropShadow" class="click-preview-shadow" value="glow" id="options-dropShadow-6" />
+						<label for="options-dropShadow-6">
+							Glow
+						</label>
+					</div>
+				</td>
+			</tr>
+			 <tr class="odd">
+				<td i18n="options_customize_rounded_corners"></td>
+				<td>
+
+					<input type="range" min="0" max="12" value="" id="options-corners" />
+					<input type="text" disabled="disabled" name="options-corners-val" value="" id="options-corners-val" /> px
+				</td>
+			</tr>
+			<tr>
+				<td i18n="options_customize_padding"></td>
+				<td>
+					<input type="range" min="0" max="12" step="2" value="" id="options-padding" />
+					<input type="text" disabled="disabled" name="options-padding-val" value="" id="options-padding-val" /> px
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<h3 class="section" i18n="options_customize_customize_colors"></h3>
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td width="25%" i18n="options_customize_background_color"></td>
+				<td width="25%" i18n="options_customize_inner_background_color"></td>
+				<td width="25%" i18n="options_customize_border_colors"></td>
+				<td width="25%" i18n="options_customize_title_color"></td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-dialbg">
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-dialbgover" rel="tooltip" title="Mouseover color" data-placement="right">
+				</td>
+				<td>
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-dialbginner">
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-dialbginnerover" rel="tooltip" title="Mouseover color" data-placement="right">
+				</td>
+				<td>
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-border">
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-borderover" rel="tooltip" title="Mouseover color" data-placement="right">
+				</td>
+				<td>
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-title">
+					<input type="text" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" class="form-control color jscolor" id="options-colors-titleover" rel="tooltip" title="Mouseover color" data-placement="right">
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td colspan="2">
+					<h3 class="section" i18n="options_customize_title"></h3>
+				</td>
+			</tr>
+			<tr>
+				<td width="300px"><label for="options-showTitle" i18n="options_customize_show_title"></label></td>
+				<td>
+					<label>
+						<input type="checkbox" class="ios-switch change-toggle-value" data-option="options.showTitle" id="options-showTitle" name="options-showTitle" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td><label for="options-showVisits" i18n="options_customize_show_visits"></label></td>
+				<td>
+					<label>
+						<input type="checkbox" class="ios-switch change-toggle-value" data-option="options.showVisits" id="options-showVisits" name="options-showVisits" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td i18n="options_customize_text_align"></td>
+				<td>
+					<div class="radio-buttons">
+
+					<input type="radio" name="options-titleAlign" id="options-titleAlign-left" class="click-preview-title-alignment" data-option="options.dialstyle.titleAlign" data-value="left" />
+					<label for="options-titleAlign-left" i18n="left">
+						Left
+					</label>
+					<input type="radio" name="options-titleAlign" id="options-titleAlign-center" class="click-preview-title-alignment" data-option="options.dialstyle.titleAlign" data-value="center"  />
+					<label for="options-titleAlign-center" i18n="center">
+						Center
+					</label>
+					<input type="radio" name="options-titleAlign" id="options-titleAlign-right" class="click-preview-title-alignment" data-option="options.dialstyle.titleAlign" data-value="right" />
+					<label for="options-titleAlign-right" i18n="Right">
+						Right
+					</label>
+					</div>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td i18n="options_customize_font_face">Font face</td>
+				<td>
+					<select id="options-fontface" class="form-control" style="width:200px;">
+						<option value='Helvetica,"Helvetica Nueue";arial,sans-serif;'>Default</option>
+						<option value='Helvetica,"Helvetica Nueue";arial,sans-serif;'>Helvetica/Helvetica Nueue</option>
+						<option value="Arial, Helvetica, sans-serif;">Arial, Helvetica</option>
+						<option value="'Arial Black', Gadget, sans-serif; ">Arial Black, Gadget</option>
+						<option value="'Bookman Old Style', serif;">Bookman Old Style</option>
+						<option value="'Comic Sans MS', cursive;">Comic Sans MS</option>
+						<option value="Courier, monospace;">Courier</option>
+						<option value="'Courier New', Courier, monospace;">Courier New</option>
+						<option value="Garamond, serif;">Garamond</option>
+						<option value="Georgia, serif;">Georgia</option>
+						<option value="Impact, Charcoal, sans-serif;">Impact, Charcoal</option>
+						<option value="'Lucida Console', Monaco, monospace;">Lucida Console, Monaco</option>
+						<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif;">Lucida Sans Unicode, Lucida Grande</option>
+						<option value="'MS Sans Serif', Geneva, sans-serif;">MS Sans Serif, Geneva</option>
+						<option value="'MS Serif', 'New York', sans-serif;">MS Serif, New York</option>
+						<option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif;">Palatino Linotype, Book Antiqua, Palatino</option>
+						<option value="Symbol, sans-serif;">Symbol</option>
+						<option value="Tahoma, Geneva, sans-serif;">Tahoma, Geneva</option>
+						<option value="'Times New Roman', Times, serif;">Times New Roman, Times</option>
+						<option value="'Trebuchet MS', Helvetica, sans-serif;">Trebuchet MS, Helvetica</option>
+						<option value="Verdana, Geneva, sans-serif;">Verdana, Geneva</option>
+						<option value="Webdings, sans-serif;">Webdings</option>
+						<option value="Wingdings, 'Zapf Dingbats', sans-serif;">Wingdings, Zapf Dingbats</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td i18n="options_customize_font_style">Font style</td>
+				<td>
+					<select id="options-fontstyle" class="form-control">
+						<option value="font-weight:normal;font-style:normal;" i18n="font_normal">Normal</option>
+						<option value="font-weight:normal;font-style:italic;"  i18n="font_italic">Italic</option>
+						<option value="font-weight:bold;font-style:normal;" i18n="font_bold">Bold</option>
+						<option value="font-weight:bold;font-style:italic;" i18n="font_bold_italic">Bold Italic</option>
+					</select>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td i18n="options_customize_font_size">Font size</td>
+				<td>
+					<input type="text" name="" value="" id="options-fontsize" class="form-control" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<h3 class="section" i18n="custom_css_add"></h3>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<span i18n="custom_css_enter"></span>
+					<br />
+					<span i18n="custom_css_text"></span>
+					<br />
+					<textarea id="options-custom-css" class="form-control" rows="10" cols="40"></textarea>
+				</td>
+			</tr>
+
+		</table><br class="clear" />
+
+	</div>
+
+	<div id="tab_general" class="options_tab">
+
+		 <table class="generalsettings">
+
+			<tr class="show-unregistered">
+				<td width="280"><label i18n="options_nav_sync">Sync and backup</label></td>
+				<td style="font-size: 1.15em; font-weight: bold;">
+					<span i18n="options_options_sync_and_backup_protect">Protect your settings with</span>
+					<a class="click-tab-sync sync-status-link" i18n="options_options_sync_and_backup">Sync and backup</a>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td width="280"><label i18n="options_options_columns">Number of columns</label></td>
+				<td>
+					<span class="questionmark" data-placement="left" rel="popover" i18n-title="options_options_columns" i18n-data-content="options_options_columns_help"></span>
+					<input type="range" min="2" max="20" step="1" value="" id="options-columns" />
+					<input type="text" class="input-range-value" disabled="disabled" name="options-columns-val" value="" id="options-columns-val" />
+					<span i18n="options_options_columns_in_a_row">in a row</span>
+				</td>
+			</tr>
+			<tr>
+				<td><label i18n="options_options_spacing">Bookmark spacing</label></td>
+				<td>
+					<input type="range" min="10" max="50" step="2" value="" id="options-dialspacing" />
+					<input type="text" class="input-range-value" disabled="disabled" name="options-dialspacing-val" value="" id="options-dialspacing-val" /> px
+				</td>
+			</tr>
+			<tr class="odd">
+				<td><label for="options-centervertically" i18n="options_options_center_vertically"></label></td>
+				<td>
+					<label>
+						<input type="checkbox" class="ios-switch change-toggle-value" data-option="options.centerVertically" name="options-centervertically" id="options-centervertically" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td><label for="options-keepActiveGroup" i18n="options_options_remember_group">Remember active group</label></td>
+				<td>
+					<span class="questionmark" data-placement="left" rel="popover" i18n-title="options_options_remember_group" i18n-data-content="options_options_remember_group_help"></span>
+					<label>
+						<input type="checkbox" id="options-keepActiveGroup" name="options-keepActiveGroup" class="ios-switch change-toggle-value" data-option="options.keepActiveGroup" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+
+			<tr class="odd">
+				<td>
+					<label for="options-highlight" i18n="options_options_highlight_pages">Highlight most visited pages?</label>
+				</td>
+				<td>
+					<span class="questionmark" data-placement="left" rel="popover" i18n-title="options_options_highlight_pages" i18n-data-content="options_options_highlight_pages_help"></span>
+					<label>
+						<input type="checkbox" id="options-highlight" name="options-highlight" class="ios-switch change-toggle-value" data-option="options.highlight" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+
+			<tr>
+				<td><label for="options-showAddButton"><span i18n="options_options_plus_button_show">Show</span> <img src="images/newtab.plus.png" width="24" /> <span i18n="options_options_plus_button_button">button</span></label></td>
+				<td>
+					<label>
+						<input type="checkbox" id="options-showAddButton" name="options-showAddButton" class="ios-switch change-toggle-value" data-option="options.showAddButton" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+
+			<tr class="odd">
+				<td>
+					<label for="options-alwaysNewTab" i18n="options_options_open_in_new_tab">Open links in new tab?</label>
+				</td>
+				<td>
+					<span class="questionmark" data-placement="left" rel="popover" i18n-title="options_options_open_in_new_tab" i18n-data-content="options_options_open_in_new_tab_help"></span>
+					<label>
+						<input type="checkbox" id="options-alwaysNewTab" name="options-alwaysNewTab" class="ios-switch change-toggle-value" data-option="options.alwaysNewTab" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+
+			<!--<tr class="odd">
+				<td>
+					<label for="options-showSearch" i18n="search">Search</label>
+				</td>
+				<td>
+					<label>
+						<input type="checkbox" id="options-showSearch" name="options-showSearch" class="ios-switch change-toggle-value" data-option="options.showSearch" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>-->
+
+			<tr>
+				<td><label for="options-scrollLayout" i18n="options_options_scroll_layout"></label></td>
+				<td>
+					<div class="radio-buttons">
+						<input type="radio" name="options-scrollLayout" id="options-scrollLayout1" class="click-set-value" data-option="options.scrollLayout" data-value="1" />
+						<label for="options-scrollLayout1" i18n="options_options_scroll_layout_scroll">
+							Allow scrolling
+						</label>
+						<input type="radio" name="options-scrollLayout" id="options-scrollLayout0" class="click-set-value" data-option="options.scrollLayout" data-value="0" />
+						<label for="options-scrollLayout0" i18n="options_options_scroll_layout_fit">
+							Fit bookmarks on screen
+						</label>
+					</div>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2">
+					<br>
+					<a class="btn btn-small white js-reset-settings alignleft"><span i18n="reset_to_default"></span></a>
+					<h3>
+						<a class="js-show-advanced-options alignright"><span i18n="options_options_advanced_options">Show advanced options</span> ...</a>
+					</h3>
+				</td>
+			</tr>
+
+		</table>
+
+		<table class="generalsettings advanced-settings">
+
+			<tr class="odd">
+				<td width="280"><label i18n="options_options_order_dials">Order bookmarks by</label></td>
+				<td id="options.order">
+					<span class="questionmark" data-placement="left" rel="popover" i18n-title="options_options_order_dials" i18n-data-content="options_options_order_dials_help"></span>
+
+					<div class="radio-buttons">
+
+						<input type="radio" name="order" id="options-order-position" class="click-set-value" data-option="options.order" data-value="position" />
+						<label for="options-order-position">
+							<span i18n="options_options_order_manual"></span> (<span i18n="default"></span>)
+						</label>
+						<input type="radio" name="order" id="options-order-visits" class="click-set-value" data-option="options.order" data-value="visits" />
+						<label for="options-order-visits" i18n="options_options_order_most_visited">
+							By most visited
+						</label>
+
+					</div>
+
+				</td>
+			</tr>
+
+			<tr>
+				<td><label i18n="options_options_thumbnail_quality">Thumbnail quality</label></td>
+				<td style="vertical-align:top!important">
+					<div class="radio-buttons">
+						<input type="radio" name="thumbnail_quality" id="options-thumbquality-high" class="click-set-value" data-option="options.thumbnailQuality" data-value="high" />
+						<label for="options-thumbquality-high" i18n="high">
+							High
+						</label>
+						<input type="radio" name="thumbnail_quality" id="options-thumbquality-medium" class="click-set-value" data-option="options.thumbnailQuality" data-value="medium" />
+						<label for="options-thumbquality-medium" i18n="medium">
+							Medium
+						</label>
+						<input type="radio" name="thumbnail_quality" id="options-thumbquality-low" class="click-set-value" data-option="options.thumbnailQuality" data-value="low" />
+						<label for="options-thumbquality-low" i18n="low">
+							Low
+						</label>
+					</div>
+
+				</td>
+			</tr>
+
+			<tr class="odd">
+				<td><label i18n="options_options_refresh_thumbnail">Refresh thumbnail image</label></td>
+				<td>
+
+					<div class="radio-buttons">
+
+					<input type="radio" name="refreshThumbnails" id="options-refreshThumbnails0" class="click-set-value" data-option="options.refreshThumbnails" data-value="0" />
+					<label for="options-refreshThumbnails0" i18n="options_options_refresh_thumbnail_disabled">
+						Disabled (default)
+					</label>
+
+					<input type="radio" name="refreshThumbnails" id="options-refreshThumbnails2" class="click-set-value" data-option="options.refreshThumbnails" data-value="2" />
+					<label for="options-refreshThumbnails2">
+						2<sup>nd</sup> visit
+					</label>
+
+
+					<input type="radio" name="refreshThumbnails" id="options-refreshThumbnails5" class="click-set-value" data-option="options.refreshThumbnails" data-value="5" />
+					<label for="options-refreshThumbnails5">
+						5<sup>th</sup> visit
+					</label>
+
+					<input type="radio" name="refreshThumbnails" id="options-refreshThumbnails10" class="click-set-value" data-option="options.refreshThumbnails" data-value="10" />
+					<label for="options-refreshThumbnails10">
+						10<sup>th</sup> visit
+					</label>
+
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label i18n="options_options_fit_logos">How to fit custom logos?</label>
+				</td>
+				<td>
+					<div class="radio-buttons">
+
+						<input type="radio" name="centerThumbnailsVertically" id="options-centerThumbnailsVertically1" class="click-set-value" data-option="options.centerThumbnailsVertically" data-value="1" />
+						<label for="options-centerThumbnailsVertically1" i18n="options_options_fit_logos_fit">Fit (default)</label>
+
+						<input type="radio" name="centerThumbnailsVertically" id="options-centerThumbnailsVertically2" class="click-set-value" data-option="options.centerThumbnailsVertically" data-value="2" />
+						<label for="options-centerThumbnailsVertically2" i18n="options_options_fit_logos_fit_and_center">Fit width and center</label>
+
+						<input type="radio" name="centerThumbnailsVertically" id="options-centerThumbnailsVertically0" class="click-set-value" data-option="options.centerThumbnailsVertically" data-value="0" />
+						<label for="options-centerThumbnailsVertically0" i18n="options_options_fit_logos_fit_width">Fit width</label>
+
+						<input type="radio" name="centerThumbnailsVertically" id="options-centerThumbnailsVertically3" class="click-set-value" data-option="options.centerThumbnailsVertically" data-value="3" />
+						<label for="options-centerThumbnailsVertically3" i18n="options_options_fit_logos_dont_resize">No resizing</label>
+
+					</div>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td><label i18n="options_options_modify_width">Modify width</label></td>
+				<td>
+					<input type="range" min="50" max="95" value="" id="options-dialspace" style="width:260px"/>
+					<input type="text" disabled="disabled" name="options-dialspace-val" value="" id="options-dialspace-val" style="border:0;background:transparent;width:25px;margin-left:15px;padding:0;margin-right:0px;" /> %
+					<span i18n="options_options_modify_width_screen">of screen width</span>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="options-thumbnailRatio" i18n="options_options_custom_ratio">Custom thumbnail ratio</label></td>
+				<td>
+					<input type="range" min="0.7" max="1.8" step="0.01" value="" id="options-thumbnailRatio" style="width:260px;" />
+					<input type="text" class="input-range-value" disabled="disabled" name="options-thumbnailRatio-val" value="" id="options-thumbnailRatio-val" />
+					<a class="explain_link click-reset-thumbnail-ration" i18n="reset_to_default">Reset to default</a>
+				</td>
+			</tr>
+
+			<tr class="odd">
+				<td>
+					<label for="options-showContextMenu" i18n="options_options_show_in_context_menu">Show Speed Dial 2 in context menu</label>
+				</td>
+				<td>
+					<span style="float:right!important;padding:6px 12px;color:#999;font-size:12px;" i18n="options_requires_restart">reqires browser restart</span>
+					<label>
+						<input type="checkbox" id="options-showContextMenu" name="options-showContextMenu" class="ios-switch change-toggle-value" data-option="options.showContextMenu" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+<!-- DESIGN -->
+
+	<div id="tab_design" class="options_tab">
+
+		<ul class="tabs">
+			<li rel="background_images" class="selected" i18n="options_themes_themes"></li>
+			<li rel="background_file" i18n="options_themes_file">Select image from computer</li>
+			<li rel="background_custom" i18n="options_themes_url">Custom URL</li>
+			<li rel="background_positioning" i18n="options_themes_settings">Customize background</li>
+		</ul>
+
+		<div id="background_file" class="tab" style="display:none">
+
+			<div class="show-premium">
+				<div class="progress-bar hidden"><div class="bar"><div class="fill"></div></div></div>
+				<div style="padding:20px 0" class="ac">
+					<p class="msg done hidden" i18n="">
+						<span i18n="options_themes_saved">Your background was sucessfully set. You may want to customize additional settings (e.g. size of the backround or its position). </span>
+						<a rel="background_positioning" i18n="options_themes_settings">Customize background</a>.
+					</p>
+					<p><b i18n="options_themes_file">Select image from your computer</b><br><br></p>
+					<button class="btn blue" id="logo-upload" i18n="select_file">Choose file</button>
+					<input type="file" id="upload-logo" accept="image/*" style="display: none" />
+				</div>
+			</div>
+			<div class="hide-premium ac" style="font-size: 1.15em;">
+				<span i18n="newtab_feature_locked">This feature is available only for Pro users. </span>
+				<a class="click-tab-sync" i18n="newtab_click_to_learn_more">Click here to learn more</a>.
+			</div>
+
+		</div>
+
+		<div id="background_custom" class="tab" style="display:none">
+
+			<p>
+				<label i18n="options_themes_bg_url">
+					Background image URL
+				</label>
+			</p>
+			<p>
+				<input placeholder="Background image URL" type="text" value="" id="options-background" class="form-control" style="width: 420px; display: inline-block; " /> &nbsp; <a class="click-reset-background" i18n="remove">Remove background</a>
+			</p>
+			<p>
+				<br>
+				<span i18n="image_hosting_providers"></span>
+			</p>
+
+		</div>
+
+		<div id="background_positioning" class="tab" style="display:none">
+
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<p>
+							<label i18n="options_themes_bg_color">Background color</label>
+						</p>
+						<input class="form-control color jscolor" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" id="options-colors-bg" />
+					</td>
+					<td>
+						<p>
+							<label i18n="options_themes_bg_repeat">Background repeat</label>
+						</p>
+
+						<select class="form-control" id="options-repeatbackground" style="width:190px;">
+							<option value="no-repeat" i18n="dont_repeat">Don't repeat</option>
+							<option value="repeat" i18n="repeat">Repeat</option>
+							<option value="repeat-x" i18n="horizontally">Horizontally</option>
+							<option value="repeat-y" i18n="vertically">Vertically</option>
+						</select>
+
+					</td>
+					<td>
+						<p>
+							<label i18n="options_themes_bg_size">Background size</label>
+						</p>
+						<select class="form-control" id="options-backgroundSize" style="width:200px;">
+							<option value="original" i18n="original_size">Original size</option>
+							<option value="cover" i18n="cover">Cover</option>
+							<option value="contain" i18n="contain">Contain</option>
+						</select>
+					</td>
+					<td>
+						<p>
+							<label i18n="options_themes_bg_position">Background position</label>
+						</p>
+
+						<select class="form-control" id="options-backgroundPosition" style="width:200px;">
+							<option value="left top">Top-Left (default)</option>
+							<option value="center top">Top-Center</option>
+							<option value="right top">Top-Right</option>
+							<option value="left center">Center-Left</option>
+							<option value="center center">Center</option>
+							<option value="right center">Center-Right</option>
+							<option value="left bottom">Bottom-Left</option>
+							<option value="center bottom">Bottom-Center</option>
+							<option value="right bottom">Bottom-Right</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+		<div id="background_images" class="tab">
+
+			<div id="themes"></div>
+			<div class="themes-unlock">
+				<h3 i18n="options_themes_premium_themes">
+					Premium themes
+				</h3>
+				<p class="lead" i18n="options_themes_premium_themes_text">
+					Upgrade your account to unlock over 100 premium themes
+				</p>
+				<p>
+					<a class="click-tab-sync btn blue" i18n="pro_sync_upgrade_your_account"></a>
+					<br><br><br><br>
+				</p>
+			</div>
+
+			<div class="themes-confirm">
+				<div class="container">
+					<div class="themes-confirm-customize">
+						<span i18n="customize_background_color"></span>
+						<input class="form-control jscolor color" data-jscolor="{padding: 10, borderRadius: 2, width: 220, height: 160}" id="color-picker" />
+					</div>
+					<a class="btn js-confirm-theme" i18n="save_settings">Save</a>
+					&nbsp;
+					<a class="btn white js-dismiss-theme" i18n="cancel">Cancel</a>
+				</div>
+			</div>
+
+			<div class="ac">
+				<p class="grey info">Some of these great patterns and backgrounds comes from <a target="_blank" title="subtlepatterns.com" href="http://subtlepatterns.com/">www.subtlepatterns.com</a> by <a target="_blank" title="Atle Mo" href="http://atlemo.com/">Atle Mo</a> <br>and <a href="http://thepatternlibrary.com/">Pattern Library by <a href="http://twitter.com/twholman">Tim Holman</a> &amp; <a href="http://twitter.com/claudioguglieri">Claudio Guglieri</a> ~</p>
+			</div>
+
+		</div>
+
+		<br class="clear" />
+	</div>
+
+<!-- SIDEBAR -->
+
+	<div id="tab_sidebars" class="options_tab">
+
+		<table class="generalsettings">
+			<tr>
+				<td width="350">
+					<label for="options-sidebar" i18n="options_sidebar_use_sidebar">Use sidebar?</label>
+					</td>
+				<td valign="middle">
+					<label>
+						<input type="checkbox" id="options-sidebar" name="options-sidebar" class="ios-switch change-toggle-value" data-option="options.sidebar" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					<label for="options-sidebar-showhistory" i18n="options_sidebar_show_history">Show Recently closed tabs?</label>
+					</td>
+				<td valign="middle">
+					<label>
+						<input type="checkbox" id="options-sidebar-showhistory" name="options-sidebar-showhistory" class="ios-switch change-toggle-value" data-option="options.sidebar.showHistory" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="options-sidebar-showapps" i18n="options_sidebar_show_apps">Show Apps?</label>
+					</td>
+				<td valign="middle">
+					<label>
+						<input type="checkbox" id="options-sidebar-showapps" name="options-sidebar-showapps" class="ios-switch change-toggle-value" data-option="options.sidebar.showApps" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					<label for="options-sidebar-showbookmarks" i18n="options_sidebar_show_bookmarks">Show Bookmarks?</label>
+					</td>
+				<td valign="middle">
+					<label>
+						<input type="checkbox" id="options-sidebar-showbookmarks" name="options-sidebar-showbookmarks" class="ios-switch change-toggle-value" data-option="options.sidebar.showBookmarks" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+<!-- IMPORT/EXPORT -->
+
+	<div id="tab_importexport" class="options_tab">
+
+		<div style="width:48%;float:left;font-size:16px;line-height:24px;margin-right:20px">
+			<a class="btn blue block move-settings" data-direction="export" i18n="options_export_title">Export settings</a>
+			<p i18n="options_export_text">This section allows you to easily import/export your bookmarks and setting to another computer.To export and backup your setting click <b>Export settings</b> button and copy all of generated text that appears.</p>
+		</div>
+		<div style="width:48%;float:right;font-size:16px;line-height:24px;">
+			<a class="btn blue block move-settings" data-direction="import" i18n="options_import_title">Import settings</a>
+			<p i18n="options_import_text">To import your setting, press <b>Import settings</b> button and paste settings you previously saved. Note that importing your settings will erase all your bookmarks and saved options!</p>
+		</div>
+		<br class="clear" /><br class="clear" />
+
+		<div id="export">
+			<p i18n="options_export_result">
+				<b>These are your exported settings</b> - copy and paste through "Import settings" button to import your settings on different computer.
+			</p>
+			<textarea class="form-control" id="export_textarea" rows="20" cols="100"></textarea>
+			<p class="right">
+				<a class="btn grey block" id="download" i18n="options_export_download">Download as a file</a>
+			</p>
+		</div>
+
+		<div id="import">
+			<p i18n="options_import_result">
+				<b>Paste settings</b> you previously exported through "Export settings" option.
+			</p>
+			<textarea class="form-control" id="import_textarea" rows="15" cols="100"></textarea><br class="clear" /><br class="clear" />
+			<a class="btn btn-small blue" id="import-settings-button" i18n="options_import_title">Import settings</a>
+		</div>
+
+	</div>
+
+<!-- END:IMPORT/EXPORT -->
+
+<!-- APPS -->
+
+	<div id="tab_apps" class="options_tab">
+
+		<table class="generalsettings">
+			<tr>
+				<td>
+					<label for="options-apps-show" i18n="options_apps_show_panel">Show panel with installed Applications?</label>
+				</td>
+				<td valign="middle">
+					<label>
+						<input type="checkbox" id="options-apps-show" class="ios-switch change-toggle-value" data-option="options.apps.show" value="1" />
+						<div><div></div></div>
+					</label>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					<label i18n="background_color">Background color</label>
+				</td>
+				<td style="width:450px;">
+					<div class="radio-buttons">
+
+					<input type="radio" name="options-apps-theme" id="options-apps-theme-light" class="click-set-value" data-option="options.apps.theme" data-value="light" />
+					<label for="options-apps-theme-light" i18n="white">
+						White
+					</label>
+
+					<input type="radio" name="options-apps-theme" id="options-apps-theme-dark" class="click-set-value" data-option="options.apps.theme" data-value="dark" />
+					<label for="options-apps-theme-dark" i18n="dark">
+						Dark
+					</label>
+
+					<input type="radio" name="options-apps-theme" id="options-apps-theme-transparent" class="click-set-value" data-option="options.apps.theme" data-value="transparent" />
+					<label for="options-apps-theme-transparent" i18n="transparent">
+						Transparent
+					</label>
+
+					</div>
+				</td>
+			</tr>
+
+		</table>
+		<br>
+		<p style="padding: 0 40px">
+			<span i18n="options_apps_show_panel_help">You can show your installed Applications in standalone panel or in sidebar (see also 'Sidebar' section).</span>
+		</p>
+		<h3 style="padding: 10px 40px">
+			<a href="http://www.google.com/support/chrome_webstore/bin/answer.py?hl=en&answer=1050586&topic=1212375" target="_blank" i18n="learn_about_chrome_apps">Learn more about Chrome Apps</a>
+		</h3>
+
+	</div>
+
+	<div id="tab_sync" class="options_tab">
+
+		<div class="hide-premium show-unregistered">
+
+			<table id="sync_account" class="sync_account">
+
+				<tr>
+					<td><label i18n="pro_sync_username">Sync username or e-mail</label></td>
+					<td><label i18n="password">Password</label></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="" id="options-sync-username" value="" i18n-placeholder="pro_sync_username" /></td>
+					<td><input type="password" name="" id="options-sync-password" value="" i18n-placeholder="enter_password" /></td>
+					<td width="200">
+						<a class="btn white" id="sync" i18n="sign_in">Sign in</a>
+					</td>
+				</tr>
+				<tr>
+					<td style="vertical-align:top!important;text-align:right;padding-right:20px;">
+					</td>
+					<td colspan="2">
+						<a target="_blank" class="grey" href="http://speeddial2.com/account/forgot_password" i18n="forgot_password">Forgot your password?</a>
+					</td>
+				</tr>
+
+			</table>
+			<div>
+
+				<center id="register_account">
+					<span i18n="sign_in">Sign in</span> &nbsp;<span i18n="or" style="text-transform: lowercase;">or</span> &nbsp;&nbsp;<a class="btn blue btn-large become-pro" i18n="pro_sync_upgrade_your_account">Upgrade your account!</a>
+				</center>
+
+				<div id="setup_sync">
+
+					<a class="become-pro"><img src="images/options.sync.preview.png" /></a>
+
+					<div>
+						<p id="sync_info" i18n="pro_sync_tagline">
+							If you like Speed Dial 2, you’ll <b>love</b> to have it always with you!
+						</p>
+						<ul id="sync_features">
+							<li i18n="pro_sync_features_1"><span>Synchronization</span> and backup!</li>
+							<li i18n="pro_sync_features_2"><span>Online</span> access to your bookmarks. </li>
+							<li i18n="pro_sync_features_3">Access from <span>mobile</span> devices. </li>
+							<li i18n="pro_sync_features_4">More customization options.</li>
+							<li i18n="pro_sync_features_5">E-mail support and more ...</li>
+						</ul>
+						<p id="sync_price"><b>$4.99</b></p>
+						<p id="sync_price_info" i18n="pro_sync_lifetime">
+							for a lifetime account.<br /><br />
+						</p>
+					</div>
+
+				</div>
+
+				<br class="clear" />
+
+				<div id="explain_sync">
+
+					<h2 i18n="pro_sync_how_it_works">How does it work?</h2>
+
+					<div id="left">
+						<h3 i18n="pro_sync_how_it_works_1_title">Seamless synchronization</h3>
+						<p i18n="pro_sync_how_it_works_1_text"></p>
+					</div>
+					<div id="right">
+						<h3 i18n="pro_sync_how_it_works_2_title">Mobile and online access to your bookmarks</h3>
+						<p i18n="pro_sync_how_it_works_2_text"></p>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="show-premium user-account">
+
+			<div class="user-avatar-container">
+				<img class="user-avatar" src="images/options.user.png" />
+			</div>
+			<table width="550" class="sync_account">
+
+				<tr>
+					<td><label></label></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td width="440">
+						<h2>
+							<span i18n="signed_in_as">You are signed in as</span>
+							<a target="_blank" href="https://speeddial2.com/login" class="sync-status-username"></a>
+						</h2>
+						<span id="sync_status"></span>
+						<small>
+							<a style="font-size: 12px;" class="js-sync-now" i18n="sync_now">Sync now</a> |
+							<a target="_blank" href="http://speeddial2.com/login" i18n="pro_sync_see_your_bookmarks_online">See your bookmarks online</a>
+						</small>
+					</td>
+					<td valign="top" width="140">
+						<a class="btn blue" id="logout" style="margin:10px;" i18n="sign_out">Sign out</a>
+					</td>
+				</tr>
+
+			</table>
+
+			<div class="sync-status">
+
+				<h2 i18n="pro_sync_signed_in_ok">All your data in the cloud!</h2>
+				<table width="680">
+					<tr>
+						<td valign="top" width="200">
+							<h3 i18n="pro_sync_status">Your sync</h3>
+							<div class="sync-status-text">
+								<p class="sync-status-bookmarks"></p>
+								<p class="sync-status-groups"></p>
+							</div>
+						</td>
+						<td valign="top">
+							<h3 i18n="pro_sync_backups">Backups of your data</h3>
+							<ul class="sync-backups"></ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br class="clear" />
+	</div>
+
+<!-- SUBMIT -->
+
+				</form>
+
+			</div>
+		</div>
+
+<!-- FOOTER -->
+
+		<div id="support">
+			<div class="footer-legal">
+				<a target="_blank" href="https://speeddial2.com/terms-and-conditions">Terms &amp; Conditions</a>
+				&nbsp;|&nbsp;
+				<a target="_blank" href="https://speeddial2.com/privacy-policy">Privacy Policy</a>
+				&nbsp;|&nbsp;
+				<a target="_blank" href="https://speeddial2.com/faq">FAQ</a>
+			</div>
+			<div class="footer-cta">
+				<div class="show-premium speed-dial-pro">
+					<p class="lead">Thank you for using Speed Dial 2 Pro!</p>
+				</div>
+			</div>
+		</div>
+
+		<footer>with <span>&hearts;</span> by <a href="http://virae.org" target="_blank" id="virae">virae</a></footer>
+
+	</div> <!--! end of #container -->
+
+	<!--! plugin component dialogs -->
+	<div id="message"></div>
+
+	<!-- import settings warning modal -->
+	<div class="modal state-closed" id="import-settings-warning">
+		<div class="modal-content">
+			<h3 i18n="warning">Warning</h3>
+			<a class="close">&times;</a>
+			<div>
+				<p class="hide-premium" i18n="options_import_warning_text_1">
+					This operation will replace all your bookmarks and groups with new settings.
+				</p>
+				<p class="show-premium" i18n="options_import_warning_text_2">
+					Besides changes to your local computer, importing your setting while you are signed in will cause bookmarks and groups to be replaced on our <b>sync server too</b>! <br>
+				</p>
+				<p>
+					<label>
+						<input type="checkbox" />
+						<span i18n="i_understand">I understand</span>
+					</label>
+				</p>
+				<p>
+					<button class="btn white modal-close" i18n="cancel">Cancel</button>
+					<button type="submit" class="btn white modal-close" i18n="continue">Continue</button>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- append or rewrite bookmarks? -->
+	<div class="modal modal-info state-closed" id="sync-conflict-warning">
+		<div class="modal-content">
+			<h3 i18n="set_up_your_account">Set up your sync</h3>
+			<a class="close">&times;</a>
+			<div>
+				<p>
+					It seems this is the first time you're connecting this computer to our sync.
+					Would you like to keep your existing bookmarks and groups and merge them with your sync?
+				</p>
+				<p>
+					<label>
+						<input name="sync-preference" type="radio" value="2" />
+						<span i18n="pro_sync_setup_option_1">Merge bookmarks and groups with the rest in my sync</span>
+					</label>
+					<br>
+					<label>
+						<input name="sync-preference" type="radio" value="1" />
+						<span i18n="pro_sync_setup_option_2">Overwrite bookmarks with sync</span>
+					</label>
+				</p>
+				<p>
+					<br>
+					<button class="btn blue modal-close" i18n="cancel">Cancel</button>
+					<button class="btn blue modal-close" type="submit" i18n="continue">Continue</button>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- append or rewrite bookmarks? -->
+	<div class="modal modal-info state-closed" id="become-a-pro-modal">
+		<div class="modal-content">
+			<h3 i18n="pro_sync_upgrade_title">How would you like to pay?</h3>
+			<a class="close">&times;</a>
+			<br>
+			<div class="ac" i18n="pro_sync_upgrade_text">
+				Awesome! You're just one step away from becoming a Pro. <br>Please select your preferred payment method.
+			</div>
+			<table style="margin:0 auto 20px auto;">
+				<tr>
+					<td>
+						<a id="pay-with-paypal">
+							<img id="pay-with-paypal" src="images/options.buy-with-paypal.png" alt="" width="200" />
+						</a>
+					</td>
+					<td i18n="or">or</td>
+					<td>
+						<a id="pay-with-google">
+							<img id="pay-with-google" src="images/options.buy-with-card.png" alt="" width="200" />
+						</a>
+					</td>
+				</tr>
+			</table>
+			<br>
+		</div>
+	</div>
+
+	<!-- append or rewrite bookmarks? -->
+	<div class="modal modal-info state-closed modal-form" id="pay-with-card">
+		<div class="modal-content">
+			<h3>Pay with card</h3>
+			<a class="close">&times;</a>
+			<div>
+				<form novalidate autocomplete="off" id="payment-form">
+
+					<label class="payment-card-number">
+						<span>Card number</span>
+						<input data-braintree-name="number" id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="off" placeholder="•••• •••• •••• ••••">
+						<div class="card-icon"></div>
+					</label>
+
+					<label class="payment-card-expiry">
+						<span>Expiration date</span>
+						<input data-braintree-name="expiration_date" id="cc-exp" type="tel" class="input-lg form-control cc-exp" autocomplete="off" placeholder="MM / YY">
+					</label>
+
+					<label class="payment-card-cvc">
+						<span>CVC</span>
+						<input data-braintree-name="cvv" id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="•••">
+					</label>
+
+					<div class="clearfix"></div>
+
+					<span class="error-message"></span>
+
+					<button id="pay" type="submit" class="btn btn-large block">Pay $4.99</button>
+
+					<div class="seal">
+						<img src="images/payment/icon-lock.svg" alt="" width="14">
+						100% secured, 256-bit encryption payment
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- append or rewrite bookmarks? -->
+	<div class="modal modal-info state-closed modal-form" id="create-user-account">
+		<div class="modal-content">
+			<h3 i18n="set_up_your_account">Set up your account</h3>
+			<a class="close">&times;</a>
+			<div>
+				<form>
+					<label>
+						<span i18n="your_email_address">Your e-mail address</span>
+						<input type="email" id="user-account-email" placeholder="Enter your email" i18n-placeholder="enter_your_email"/>
+					</label>
+
+					<label>
+						<span i18n="choose_password">Choose password</span>
+						<input type="password" id="user-account-password" placeholder="Enter password" i18n-placeholder="enter_password"/>
+					</label>
+					<span class="error-message"></span>
+					<button id="create-user-account-submit" type="submit" class="btn btn-large block" i18n="continue">Continue</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- append or rewrite bookmarks? -->
+	<div class="modal modal-info state-closed" id="payment-complete">
+		<div class="modal-content">
+			<h3 i18n="thank_you">Thank you!</h3>
+			<a class="close">&times;</a>
+			<div>
+				<h4 i18n="welcome_message">Welcome to Speed Dial 2 Pro!</h4>
+				<p i18n="pro_sync_upgrade_done_text">
+					All your settings and bookmarks will be synchronized and safely backed up! Please click the button below to allow your initial sync.
+				</p>
+				<button type="submit" class="btn btn-large blue block" i18n="pro_sync_upgrade_done_continue">Start initial synchronization</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-overlay state-closed"></div>
+
+</body></html>

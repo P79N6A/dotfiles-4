@@ -1,0 +1,12 @@
+2018/10/30-09:54:20.357 1349 Reusing MANIFEST /home/victor/.config/chromium/Default/IndexedDB/https_drive.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2018/10/30-09:54:20.357 1349 Recovering log #4
+2018/10/30-09:54:20.369 1349 Reusing old log /home/victor/.config/chromium/Default/IndexedDB/https_drive.google.com_0.indexeddb.leveldb/000004.log 
+2018/10/30-09:54:28.223 1659 Level-0 table #8: started
+2018/10/30-09:54:28.573 1659 Level-0 table #8: 7449676 bytes OK
+2018/10/30-09:54:28.696 1659 Delete type=0 #4
+2018/10/30-09:54:29.066 1659 Level-0 table #10: started
+2018/10/30-09:54:29.332 1659 Level-0 table #10: 7438600 bytes OK
+2018/10/30-09:54:29.391 1659 Delete type=0 #7
+2018/10/30-10:02:29.335 1659 Level-0 table #12: started
+2018/10/30-10:02:29.531 1659 Level-0 table #12: 4508013 bytes OK
+2018/10/30-10:02:29.589 1659 Delete type=0 #9
